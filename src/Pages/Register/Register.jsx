@@ -3,6 +3,13 @@ import React from "react";
 import registerLottie from "../../assets/lotties/Register.json";
 
 const Register = () => {
+    const handleRegister = e => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+    }
   return (
     <div className="hero bg-base-200 min-h-screen flex items-center justify-center p-4">
       <div className="card bg-base-100 w-full max-w-5xl shadow-2xl border border-base-300 overflow-hidden">
@@ -26,7 +33,8 @@ const Register = () => {
 
             <div className="divider text-xs text-base-content/40 uppercase font-bold">Or register with email</div>
 
-            <div className="form-control w-full">
+           <form onSubmit={handleRegister}>
+             <div className="form-control w-full">
               <label className="label py-1"><span className="label-text font-semibold">Full Name</span></label>
               <input type="text" placeholder="Enter your name" name="name" className="input input-bordered focus:input-primary w-full" />
             </div>
@@ -47,6 +55,7 @@ const Register = () => {
                 Already have an account? <a className="link link-primary font-bold">Login here</a>
               </p>
             </div>
+           </form>
           </div>
 
           <div className="hidden lg:flex w-1/2 bg-base-200 h-full items-center justify-center p-10">
