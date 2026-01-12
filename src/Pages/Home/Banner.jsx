@@ -36,10 +36,9 @@ const Banner = () => {
      initial= {{scale: 0}}
      animate={{scale: 1, transition: {duration: 4}}}
 
-      className="text-5xl font-bold">Remote <span className='text-blue-500'>Jobs</span> for you!</motion.h1>
-      <p className="py-6">
-        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-        quasi. In deleniti eaque aut repudiandae et a id nisi.
+      className="text-5xl font-bold">Your Gateway to a  <span className='text-blue-500'>Dream Career!</span></motion.h1>
+      <p className="py-6 text-2xl font-bold">
+       Connecting talented professionals with top companies worldwide. Whether you are looking for your first job or a leadership role, we provide the platform to make it happen.
       </p>
       <button className="btn btn-primary">Get Started</button>
     </div>
