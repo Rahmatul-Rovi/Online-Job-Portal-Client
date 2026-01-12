@@ -8,16 +8,24 @@ const Banner = () => {
        <div className="hero bg-base-200 min-h-screen">
   <div className="hero-content flex-col lg:flex-row-reverse">
    <div className='flex-1'>
-     <img
+     <motion.img
       src= {team1}
-      className="max-w-sm border-4 rounded-t-4xl rounded-br-4xl shadow-2xl"
+      animate= {{y:[100,150, 100]}}
+      transition={{duration: 5, repeat: Infinity, repeatType: 'reverse'}}
+      className="max-w-sm border-blue-400 border-s-4 border-b-4 rounded-t-4xl rounded-br-4xl shadow-2xl"
+    />
+     <motion.img
+      src= {team2}
+      animate= {{x:[100,150, 100]}}
+      transition={{duration: 10, delay: 2, repeat: Infinity, repeatType: 'reverse'}}
+      className="max-w-sm border-blue-400 border-s-4 border-b-4 rounded-t-4xl rounded-br-4xl shadow-2xl"
     />
    </div>
     <div className='flex-1'>
       <motion.h1 
       animate={{rotate: 180,
-      x: 100,
-      y: -100,
+      x: 200,
+      y: -200,
       transition: {
         duration:4
       }
