@@ -1,6 +1,8 @@
 import React, { Suspense } from 'react';
 import Banner from './Banner';
 import HotJobs from './HotJobs';
+import Stat from '../Shared/Stat';
+
 
 
  const jobsPromise = fetch('http://localhost:3000/jobs')
@@ -12,6 +14,8 @@ const Home = () => {
            <Suspense fallback={'Loading hot Jobs'}>
              <HotJobs jobsPromise={jobsPromise}></HotJobs>
            </Suspense>
+           <Stat></Stat>
+          
         </div>
     );
 };
