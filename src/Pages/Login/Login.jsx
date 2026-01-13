@@ -2,11 +2,15 @@ import React, { useContext } from "react"; // 'use' এর বদলে 'useCont
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 import { Link, useNavigate } from "react-router-dom"; // navigate করার জন্য
 import Swal from 'sweetalert2'; // সুন্দর এলার্টের জন্য
+import { useLocation } from "react-router";
 
 const Login = () => {
   // ১. Context থেকে signInUser এবং signInWithGoogle আনা হচ্ছে
   const { signInUser, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  console.log("Location in the login page",location);
 
   // ২. ইমেইল ও পাসওয়ার্ড দিয়ে লগইন
   const handleLogin = (e) => {

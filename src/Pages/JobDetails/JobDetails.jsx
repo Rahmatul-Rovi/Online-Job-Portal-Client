@@ -78,7 +78,7 @@ const JobDetails = () => {
                 <FaDollarSign className="text-2xl" />
                 {salaryRange.min} - {salaryRange.max} <span className="text-lg font-medium text-gray-500">{salaryRange.currency.toUpperCase()}</span>
               </p>
-              <Link to={`/apply/${_id}`} className="btn btn-primary btn-block text-lg">
+              <Link to={`/jobApply/${_id}`} className="btn btn-primary btn-block text-lg">
                 Apply Now
               </Link>
             </div>
