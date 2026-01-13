@@ -1,18 +1,16 @@
-import React, { useContext } from "react"; // 'use' এর বদলে 'useContext' ব্যবহার করা ভালো
+import React, { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
-import { Link, useNavigate } from "react-router-dom"; // navigate করার জন্য
-import Swal from 'sweetalert2'; // সুন্দর এলার্টের জন্য
-import { useLocation } from "react-router";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 const Login = () => {
-  // ১. Context থেকে signInUser এবং signInWithGoogle আনা হচ্ছে
   const { signInUser, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log("Location in the login page",location);
+  // Redirection target after successful login
+  const from = location.state?.from?.pathname || "/";
 
-  // ২. ইমেইল ও পাসওয়ার্ড দিয়ে লগইন
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -21,23 +19,32 @@ const Login = () => {
 
     signInUser(email, password)
       .then(result => {
-          console.log(result.user);
-          Swal.fire("Success!", "Login Successful", "success");
-          navigate("/"); // লগইন সফল হলে হোমে যাবে
+        Swal.fire({
+          icon: "success",
+          title: "Welcome Back!",
+          text: "Login Successful",
+          timer: 1500,
+          showConfirmButton: false
+        });
+        navigate(from, { replace: true });
       })
       .catch(error => {
-          console.error(error);
-          Swal.fire("Error", "Invalid email or password", "error");
+        console.error(error);
+        Swal.fire("Error", "Invalid email or password", "error");
       })
   };
 
-  // ৩. গুগল দিয়ে লগইন ফাংশন
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then(result => {
-        console.log(result.user);
-        Swal.fire("Success!", "Logged in with Google", "success");
-        navigate("/");
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Logged in with Google",
+          timer: 1500,
+          showConfirmButton: false
+        });
+        navigate(from, { replace: true });
       })
       .catch(error => {
         console.error(error);
@@ -46,11 +53,10 @@ const Login = () => {
   }
 
   return (
-    <div className="hero bg-base-200 min-h-screen flex items-center justify-center p-6">
-      <div className="card bg-base-100 w-full max-w-md shadow-2xl border border-base-300">
+    <div className="hero bg-base-200 min-h-screen flex items-center justify-center p-6 font-sans">
+      <div className="card bg-base-100 w-full max-w-md shadow-2xl border border-base-300 transition-all">
         <div className="card-body gap-8 p-8 lg:p-10">
           
-          {/* Title Section */}
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-primary">
               Welcome Back
@@ -60,10 +66,9 @@ const Login = () => {
             </p>
           </div>
 
-          {/* Social Login Section */}
           <div className="space-y-4">
             <button 
-              onClick={handleGoogleSignIn} // গুগল ফাংশন কল করা হয়েছে
+              onClick={handleGoogleSignIn}
               type="button" 
               className="btn btn-outline flex items-center gap-3 w-full border-base-300 hover:bg-base-200 transition-all font-semibold shadow-sm">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-5 h-5">
@@ -80,7 +85,6 @@ const Login = () => {
             Or login with email
           </div>
 
-          {/* Form Fields */}
           <form onSubmit={handleLogin} className="space-y-5">
             <div className="form-control w-full">
               <label className="label">
@@ -113,7 +117,6 @@ const Login = () => {
               </div>
             </div>
 
-            {/* Action Buttons */}
             <div className="flex flex-col gap-5 pt-2">
               <button type="submit" className="btn btn-primary shadow-xl shadow-primary/20 text-white font-bold text-lg">
                 Sign In

@@ -4,11 +4,15 @@ import { Navigate, useLocation } from 'react-router';
 
 const PrivateRoute = ({children}) => {
     
-    const {user} = use(AuthContext);
+    const {user, loading} = use(AuthContext); 
     const location = useLocation();
-    console.log(location.pathname);
+
+    if(loading) {
+        return <span className="loading loading-spinner loading-lg"></span>
+    }
+
     if(!user){
-        return <Navigate to="/login" state={location.pathname}></Navigate>
+        return <Navigate to="/login" state={{ from: location }} replace />
     }
 
     return children;
