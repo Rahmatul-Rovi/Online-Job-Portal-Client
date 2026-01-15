@@ -1,29 +1,24 @@
-import React, { useContext } from "react"; // use er bodole useContext beshi stable
+import React, { use } from "react";
 import { NavLink } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 
 const Navbar = () => {
-  // Destructure user and signOut
-  const { user, signOutUser } = useContext(AuthContext);
+  const { user, signOutUser } = use(AuthContext);
 
   const handleSignOut = () => {
     signOutUser()
       .then(() => console.log("Sign Out Successful"))
-      .catch((error) => console.log(error));
+      .catch(error => console.log(error));
   };
 
   const links = (
     <>
       <li><NavLink to="/">Home</NavLink></li>
-      
-      {/* Role based logic: Applicant hole Application dekhabe */}
-      {user && user.role === "applicant" && (
-        <li><NavLink to="/myApplications">My Applications</NavLink></li>
-      )}
-
-      {/* Role based logic: Recruiter hole Add Job dekhabe */}
-      {user && user.role === "recruiter" && (
-        <li><NavLink to="/addJob">Add Job</NavLink></li>
+      {user && (
+        <>
+          <li><NavLink to="/myApplications">My Applications</NavLink></li>
+          <li><NavLink to="/addJob">Add Job</NavLink></li>
+        </>
       )}
     </>
   );
@@ -31,6 +26,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100 shadow-sm container mx-auto">
       <div className="navbar-start">
+        {/* Mobile Responsive Dropdown */}
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -41,21 +37,40 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">JobPortal</a>
+        <NavLink to="/" className="btn btn-ghost text-xl font-bold">JobPortal</NavLink>
       </div>
+
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 gap-2">
           {links}
         </ul>
       </div>
-      <div className="navbar-end gap-2">
+
+      <div className="navbar-end gap-4">
         {user ? (
-          <button onClick={handleSignOut} className="btn btn-secondary">Logout</button>
+          <div className="dropdown dropdown-end">
+            {/* User Profile Image */}
+            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                <img 
+                  alt="User Profile" 
+                  src={user?.photoURL || "https://img.icons8.com/officel/80/user.png"} 
+                />
+              </div>
+            </div>
+            {/* Dropdown Menu on Click */}
+            <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+              <li className="px-4 py-2 font-semibold text-primary">{user?.displayName || "User"}</li>
+              <div className="divider my-0"></div>
+              <li><NavLink to="/profile">My Profile</NavLink></li>
+              <li><button onClick={handleSignOut} className="text-red-500">Logout</button></li>
+            </ul>
+          </div>
         ) : (
-          <>
-            <NavLink className="btn btn-outline btn-primary" to="/login">Login</NavLink>
-            <NavLink className="btn btn-primary" to="/register">Register</NavLink>
-          </>
+          <div className="flex gap-2">
+            <NavLink className="btn btn-outline btn-primary btn-sm md:btn-md" to="/login">Login</NavLink>
+            <NavLink className="btn btn-primary btn-sm md:btn-md" to="/register">Register</NavLink>
+          </div>
         )}
       </div>
     </div>
