@@ -1,12 +1,31 @@
-import React from "react";
+import React, {  } from "react";
+import useAuth from "../../hooks/useAuth";
 
 const AddJob = () => {
+      
+    const {user} = useAuth();
+
+
     const handleAddAJob = e => {
         e.preventDefault();
          const form = e.target;
          const formData = new FormData(form);
          const data = Object.fromEntries(formData.entries());
          console.log(data);
+         const {min, max, currency, ...newJob} = data;
+         newJob.salaryRange= {
+            min, max, currency
+         }
+         //process requirement
+         const requirementsString = newJob.requirements;
+         const requirementsDirty = requirementsString.split(",");
+         const requirementsClean = requirementsDirty.map(req => req.trim());
+         newJob.requirements = requirementsClean;
+
+         //process responsibilities
+         newJob.responsibilities = newJob.responsibilities.split(',').map(res => res.trim());
+    
+         console.log(newJob);
     }
 
 
@@ -62,18 +81,21 @@ const AddJob = () => {
             className="btn"
             type="radio"
             name="jobType"
+            value="on-site"
             aria-label="On-Site"
           />
           <input
             className="btn"
             type="radio"
             name="jobType"
+            value="remote"
             aria-label="Remote"
           />
           <input
             className="btn"
             type="radio"
             name="jobType"
+            value="hybrid"
             aria-label="Hybrid"
           />
         </div>
@@ -165,6 +187,7 @@ const AddJob = () => {
           type="email"
           name="hr_email"
           className="input"
+          defaultValue={user.email}
           placeholder="HR Email"
         />
 
