@@ -1,33 +1,44 @@
-import React, {  } from "react";
+import React from "react";
 import useAuth from "../../hooks/useAuth";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddJob = () => {
-      
-    const {user} = useAuth();
+  const { user } = useAuth();
 
-
-    const handleAddAJob = e => {
-        e.preventDefault();
-         const form = e.target;
-         const formData = new FormData(form);
-         const data = Object.fromEntries(formData.entries());
-         console.log(data);
-         const {min, max, currency, ...newJob} = data;
-         newJob.salaryRange= {
-            min, max, currency
-         }
-         //process requirement
-         const requirementsString = newJob.requirements;
-         const requirementsDirty = requirementsString.split(",");
-         const requirementsClean = requirementsDirty.map(req => req.trim());
-         newJob.requirements = requirementsClean;
-
-         //process responsibilities
-         newJob.responsibilities = newJob.responsibilities.split(',').map(res => res.trim());
+  const handleAddAJob = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
     
-         console.log(newJob);
-    }
+    const { min, max, currency, ...newJob } = data;
+    newJob.salaryRange = { min, max, currency };
 
+    // Processing arrays safely
+    newJob.requirements = newJob.requirements ? newJob.requirements.split(",").map((req) => req.trim()) : [];
+    newJob.responsibilities = newJob.responsibilities ? newJob.responsibilities.split(",").map((res) => res.trim()) : [];
+
+    newJob.status = "active";
+
+    // Notice: changed https to http
+    axios.post("http://localhost:3000/jobs", newJob)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "This Job added successfully!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          form.reset(); // Submiter por form clear hobe
+        }
+      })
+      .catch((error) => {
+        console.error("Error adding job:", error);
+      });
+  };
 
   return (
     <form onSubmit={handleAddAJob}>
@@ -104,17 +115,18 @@ const AddJob = () => {
       {/* Job Category*/}
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
         <legend className="fieldset-legend">Job Category</legend>
-        <select defaultValue="Job Category" className="select">
+        <select defaultValue="Job Category" name="category" className="select">
           <option disabled={true}>Job Category</option>
           <option>Engineering</option>
           <option>Marketting</option>
           <option>Finance</option>
         </select>
       </fieldset>
+
       {/*Application Deadline */}
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
         <legend className="fieldset-legend">Application Deadline</legend>
-        <input type="date" className="input" />
+        <input type="date" name="deadline" className="input" />
       </fieldset>
       {/* Salary Range*/}
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
@@ -126,7 +138,7 @@ const AddJob = () => {
             <input
               type="text"
               className="input"
-              name="salaryMin"
+              name="min"
               placeholder="Minimum Salary"
             />
           </div>
@@ -135,7 +147,7 @@ const AddJob = () => {
             <label className="label">Maximum Salary</label>
             <input
               type="text"
-              name="SalaryMax"
+              name="max"
               className="input"
               placeholder="Maximum Salary"
             />
@@ -143,7 +155,7 @@ const AddJob = () => {
 
           <div>
             <label className="label">Select a currency</label>
-            <select defaultValue="currency" className="select">
+            <select defaultValue="currency" name="currency" className="select">
               <option disabled={true}>Select a currency</option>
               <option>BDT</option>
               <option>USD</option>
@@ -155,23 +167,35 @@ const AddJob = () => {
       {/*Job Description */}
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
         <legend className="fieldset-legend">Description</legend>
-        <textarea className="textarea" name="description"  placeholder="Job Description"></textarea>
+        <textarea
+          className="textarea"
+          name="description"
+          placeholder="Job Description"
+        ></textarea>
       </fieldset>
 
-       {/*Job requirement */}
+      {/*Job requirement */}
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
         <legend className="fieldset-legend">Job Requirement</legend>
-        <textarea className="textarea" name="Requirement"  placeholder="Job Requirements (seperate by comma)"></textarea>
+        <textarea
+          className="textarea"
+          name="requirements"
+          placeholder="Job Requirements (seperate by comma)"
+        ></textarea>
       </fieldset>
 
-       {/*Job responsibilities */}
+      {/*Job responsibilities */}
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
         <legend className="fieldset-legend">Job responsibilities</legend>
-        <textarea className="textarea" name="responsibilities"  placeholder="Job Responsibilities (seperate by comma)"></textarea>
+        <textarea
+          className="textarea"
+          name="responsibilities"
+          placeholder="Job Responsibilities (seperate by comma)"
+        ></textarea>
       </fieldset>
- 
-     {/* {HR Info} */}
-       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+
+      {/* {HR Info} */}
+      <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
         <legend className="fieldset-legend">HR related info</legend>
 
         <label className="label">HR Name</label>
@@ -191,7 +215,7 @@ const AddJob = () => {
           placeholder="HR Email"
         />
 
-      <input type="submit" className="btn" value="Add Job" />
+        <input type="submit" className="btn" value="Add Job" />
       </fieldset>
     </form>
   );
