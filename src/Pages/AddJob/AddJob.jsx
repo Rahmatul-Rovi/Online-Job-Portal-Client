@@ -112,7 +112,7 @@ const AddJob = () => {
 
           <div>
             <label className="label">Select a currency</label>
-            <select defaultValue="Job Category" className="select">
+            <select defaultValue="currency" className="select">
               <option disabled={true}>Select a currency</option>
               <option>BDT</option>
               <option>USD</option>
@@ -121,9 +121,45 @@ const AddJob = () => {
           </div>
         </div>
       </fieldset>
-      {/* */}
+      {/*Job Description */}
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-        <legend className="fieldset-legend">Basic Info</legend>
+        <legend className="fieldset-legend">Description</legend>
+        <textarea className="textarea" name="description"  placeholder="Job Description"></textarea>
+      </fieldset>
+
+       {/*Job requirement */}
+      <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+        <legend className="fieldset-legend">Job Requirement</legend>
+        <textarea className="textarea" name="Requirement"  placeholder="Job Requirements (seperate by comma)"></textarea>
+      </fieldset>
+
+       {/*Job responsibilities */}
+      <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+        <legend className="fieldset-legend">Job responsibilities</legend>
+        <textarea className="textarea" name="responsibilities"  placeholder="Job Responsibilities (seperate by comma)"></textarea>
+      </fieldset>
+ 
+     {/* {HR Info} */}
+       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+        <legend className="fieldset-legend">HR related info</legend>
+
+        <label className="label">HR Name</label>
+        <input
+          type="text"
+          name="hr_name"
+          className="input"
+          placeholder="HR Name"
+        />
+
+        <label className="label">HR Email</label>
+        <input
+          type="email"
+          name="hr_email"
+          className="input"
+          placeholder="HR Email"
+        />
+
+      <input type="submit" className="btn" value="Add Job" />
       </fieldset>
     </form>
   );
