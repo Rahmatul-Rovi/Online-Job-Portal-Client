@@ -85,9 +85,41 @@ const AddJob = () => {
         <legend className="fieldset-legend">Application Deadline</legend>
         <input type="date" className="input" />
       </fieldset>
-      {/* */}
+      {/* Salary Range*/}
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-        <legend className="fieldset-legend">Basic Info</legend>
+        <legend className="fieldset-legend">Salary Range</legend>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4">
+          <div>
+            <label className="label">Minimum Salary</label>
+            <input
+              type="text"
+              className="input"
+              name="salaryMin"
+              placeholder="Minimum Salary"
+            />
+          </div>
+
+          <div>
+            <label className="label">Maximum Salary</label>
+            <input
+              type="text"
+              name="SalaryMax"
+              className="input"
+              placeholder="Maximum Salary"
+            />
+          </div>
+
+          <div>
+            <label className="label">Select a currency</label>
+            <select defaultValue="Job Category" className="select">
+              <option disabled={true}>Select a currency</option>
+              <option>BDT</option>
+              <option>USD</option>
+              <option>EUR</option>
+            </select>
+          </div>
+        </div>
       </fieldset>
       {/* */}
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
