@@ -12,9 +12,9 @@ const JobList = ({ jobsCreatedByPromise }) => {
           <thead>
             <tr>
               <th></th>
-              <th>Job Title</th>
-              <th>Deadline</th>
-              <th>View Applications</th>
+              <th className="text-black">Job Title</th>
+              <th className="text-black">Deadline</th>
+              <th className="text-black">View Applications</th>
             </tr>
           </thead>
           <tbody>
@@ -22,9 +22,9 @@ const JobList = ({ jobsCreatedByPromise }) => {
            {
             jobs.map((job, index) =>  <tr key={job._id}>
               <th>{index+1}</th>
-              <td>{job.title}</td>
-              <td>{job.deadline}</td>
-              <td> <Link to={`/applications/${job._id}`}> View Applications </Link> </td>
+              <td className="text-black">{job.title}</td>
+              <td className="text-black">{job.deadline}</td>
+              <td className="text-black"> <Link to={`/applications/${job._id}`}> View Applications </Link> </td>
             </tr>)
            }
           </tbody>
