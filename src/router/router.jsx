@@ -11,6 +11,8 @@ import AddJob from "../Pages/AddJob/AddJob";
 import Profile from "../Pages/Profile";
 import MyPostedJobs from "../Pages/MyPostedJobs/MyPostedJobs";
 import ViewApplications from "../Pages/ViewApplications/ViewApplications";
+import About from "../Pages/About/About";
+import Contact from "../Pages/Contact/Contact";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +55,14 @@ const router = createBrowserRouter([
     {
       path: "/login",
       Component: Login
+    },
+    {
+      path: "about",
+      Component: About
+    },
+    {
+      path: "contact",
+      Component: Contact
     },
     {
       path: "/jobs/:id",
