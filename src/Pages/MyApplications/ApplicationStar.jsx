@@ -1,61 +1,55 @@
 import React from "react";
+import { FaBriefcase, FaEye, FaCheckCircle } from "react-icons/fa";
 
 const ApplicationStar = () => {
   return (
-    <div className="stats shadow">
-      <div className="stat">
-        <div className="stat-figure text-primary">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            className="inline-block h-8 w-8 stroke-current"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-            ></path>
-          </svg>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      {/* 1. Total Applications */}
+      <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm flex items-center justify-between group hover:border-indigo-500 transition-all duration-300">
+        <div>
+          <p className="text-sm font-black text-gray-400 uppercase tracking-widest mb-1">
+            Total Applied
+          </p>
+          <div className="stat-value text-4xl font-black text-[#1a1a1a]">12</div>
+          <p className="text-xs font-bold text-indigo-500 mt-2 flex items-center gap-1">
+            <span>↑ 2</span> <span className="text-gray-400">new this week</span>
+          </p>
         </div>
-        <div className="stat-title">Total Likes</div>
-        <div className="stat-value text-primary">25.6K</div>
-        <div className="stat-desc">21% more than last month</div>
+        <div className="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center text-[#6366f1] group-hover:scale-110 transition-transform">
+          <FaBriefcase size={28} />
+        </div>
       </div>
 
-      <div className="stat">
-        <div className="stat-figure text-secondary">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            className="inline-block h-8 w-8 stroke-current"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M13 10V3L4 14h7v7l9-11h-7z"
-            ></path>
-          </svg>
+      {/* 2. Profile Views */}
+      <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm flex items-center justify-between group hover:border-purple-500 transition-all duration-300">
+        <div>
+          <p className="text-sm font-black text-gray-400 uppercase tracking-widest mb-1">
+            Profile Views
+          </p>
+          <div className="stat-value text-4xl font-black text-[#1a1a1a]">1.2K</div>
+          <p className="text-xs font-bold text-purple-500 mt-2 flex items-center gap-1">
+            <span>↑ 12%</span> <span className="text-gray-400">vs last month</span>
+          </p>
         </div>
-        <div className="stat-title">Page Views</div>
-        <div className="stat-value text-secondary">2.6M</div>
-        <div className="stat-desc">21% more than last month</div>
+        <div className="w-16 h-16 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-500 group-hover:scale-110 transition-transform">
+          <FaEye size={28} />
+        </div>
       </div>
 
-      <div className="stat">
-        <div className="stat-figure text-secondary">
-          <div className="avatar avatar-online">
-            <div className="w-16 rounded-full">
-              <img src="https://img.daisyui.com/images/profile/demo/anakeen@192.webp" />
-            </div>
+      {/* 3. Shortlisted / Success Rate */}
+      <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm flex items-center justify-between group hover:border-emerald-500 transition-all duration-300">
+        <div>
+          <p className="text-sm font-black text-gray-400 uppercase tracking-widest mb-1">
+            Shortlisted
+          </p>
+          <div className="stat-value text-4xl font-black text-[#1a1a1a]">85%</div>
+          <div className="w-full bg-gray-100 h-1.5 rounded-full mt-4 overflow-hidden">
+             <div className="bg-emerald-500 h-full w-[85%] rounded-full"></div>
           </div>
         </div>
-        <div className="stat-value">86%</div>
-        <div className="stat-title">Tasks done</div>
-        <div className="stat-desc text-secondary">31 tasks remaining</div>
+        <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-500 group-hover:scale-110 transition-transform">
+          <FaCheckCircle size={28} />
+        </div>
       </div>
     </div>
   );
