@@ -64,11 +64,13 @@ const router = createBrowserRouter([
       path: "contact",
       Component: Contact
     },
-    {
-      path: "/jobs/:id",
-      Component: JobDetails,
-      loader: ({params})=> fetch(`http://localhost:3000/jobs/${params.id}`)
-    }
+   {
+  path: "/jobs/:id",
+  element: <JobDetails />,
+  loader: ({ params }) =>
+    fetch(`http://localhost:3000/jobs/${params.id}`)
+}
+
     ]
   },
 ]);

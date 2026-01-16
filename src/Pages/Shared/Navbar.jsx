@@ -27,10 +27,11 @@ const Navbar = () => {
           <li><NavLink to="/myApplications" className={linkStyles}>My Applications</NavLink></li>
           <li><NavLink to="/addJob" className={linkStyles}>Add Job</NavLink></li>
           <li><NavLink to="/myPostedJobs" className={linkStyles}>My Posted Jobs</NavLink></li>
-          <li><NavLink to="/about" className={linkStyles}>About Us</NavLink></li>
-          <li><NavLink to="/contact" className={linkStyles}>Contact Us</NavLink></li>
+         
         </>
       )}
+       <li><NavLink to="/about" className={linkStyles}>About Us</NavLink></li>
+          <li><NavLink to="/contact" className={linkStyles}>Contact Us</NavLink></li>
     </>
   );
 
