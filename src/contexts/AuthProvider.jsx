@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext/AuthContext';
-// ১. GoogleAuthProvider এবং signInWithPopup ইম্পোর্ট করতে হবে
+
 import { 
     createUserWithEmailAndPassword, 
     onAuthStateChanged, 
@@ -10,12 +10,12 @@ import {
     signInWithPopup 
 } from 'firebase/auth';
 import { auth } from '../Firebase/firebase.init';
+import axios from 'axios';
 
 const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
     
-    // ২. গুগল প্রোভাইডার ডিক্লেয়ার করা
     const googleProvider = new GoogleAuthProvider();
 
     const createUser = (email, password) => {
@@ -28,7 +28,6 @@ const AuthProvider = ({children}) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
-    // ৩. গুগল দিয়ে সাইন ইন করার ফাংশন যোগ করা
     const signInWithGoogle = () => {
         setLoading(true);
         return signInWithPopup(auth, googleProvider);
@@ -43,6 +42,18 @@ const AuthProvider = ({children}) => {
         const unSubscribe = onAuthStateChanged(auth, currentUser =>{
             setUser(currentUser);
             setLoading(false);
+            // if(currentUser?.email){
+            //     const userData = {email : currentUser.email};
+            //     axios.post('http://localhost:3000/jwt', userData)
+            //     .then(res => {
+            //         console.log('Token after jwt',res.data);
+            //         const token = res.data.token;
+            //         localStorage.setItem('token', token);
+            //     })
+            //     .error(error => {
+            //         console.log(error);
+            //     })
+           // }
             console.log("User in the auth state change", currentUser);
         })
         return()=> {
@@ -56,11 +67,11 @@ const AuthProvider = ({children}) => {
        createUser,
        signInUser,
        signOutUser,
-       signInWithGoogle // ৪. এটা এখানে অবশ্যই দিতে হবে যেন অন্য ফাইল থেকে পাওয়া যায়
+       signInWithGoogle 
     }
 
     return (
-       <AuthContext.Provider value={authInfo}> {/* ৫. .Provider ব্যবহার করা নিরাপদ */}
+       <AuthContext.Provider value={authInfo}> 
              {children}
        </AuthContext.Provider>
     );
