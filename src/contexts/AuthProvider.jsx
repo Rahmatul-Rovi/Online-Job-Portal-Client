@@ -44,7 +44,7 @@ const AuthProvider = ({children}) => {
             setLoading(false);
             // if(currentUser?.email){
             //     const userData = {email : currentUser.email};
-            //     axios.post('http://localhost:3000/jwt', userData)
+            //     axios.post('https://job-portal-server-50h1rzimu-rahmatul-rovis-projects.vercel.app/jwt', userData)
             //     .then(res => {
             //         console.log('Token after jwt',res.data);
             //         const token = res.data.token;

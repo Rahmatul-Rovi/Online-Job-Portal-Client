@@ -20,7 +20,7 @@ const AddJob = () => {
     newJob.responsibilities = newJob.responsibilities ? newJob.responsibilities.split(",").map((res) => res.trim()) : [];
     newJob.status = "active";
 
-    axios.post("http://localhost:3000/jobs", newJob)
+    axios.post("https://job-portal-server-50h1rzimu-rahmatul-rovis-projects.vercel.app/jobs", newJob)
       .then((res) => {
         if (res.data.insertedId) {
           Swal.fire({

@@ -10,7 +10,7 @@ const ViewApplications = () => {
   const handleStatusChange = (e, app_id) => {
     // Note: status pathanor somoy target value nite hobe
     axios
-      .patch(`http://localhost:3000/applications/${app_id}`, {
+      .patch(`https://job-portal-server-50h1rzimu-rahmatul-rovis-projects.vercel.app/applications/${app_id}`, {
         status: e.target.value,
       })
       .then((res) => {
