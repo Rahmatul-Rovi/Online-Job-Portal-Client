@@ -1,4 +1,6 @@
 export const myApplicationsPromise = email => {
-    return fetch(`https://job-portal-server-50h1rzimu-rahmatul-rovis-projects.vercel.app/applications?email=${email}`)
+    return fetch(`http://localhost:3000/applications?email=${email}`, {
+        credentials: 'include'
+    })
     .then(res => res.json())
 }

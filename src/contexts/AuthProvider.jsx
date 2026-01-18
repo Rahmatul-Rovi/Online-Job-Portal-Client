@@ -42,18 +42,20 @@ const AuthProvider = ({children}) => {
         const unSubscribe = onAuthStateChanged(auth, currentUser =>{
             setUser(currentUser);
             setLoading(false);
-            // if(currentUser?.email){
-            //     const userData = {email : currentUser.email};
-            //     axios.post('https://job-portal-server-50h1rzimu-rahmatul-rovis-projects.vercel.app/jwt', userData)
-            //     .then(res => {
-            //         console.log('Token after jwt',res.data);
-            //         const token = res.data.token;
-            //         localStorage.setItem('token', token);
-            //     })
-            //     .error(error => {
-            //         console.log(error);
-            //     })
-           // }
+            if(currentUser?.email){
+                const userData = {email : currentUser.email};
+                axios.post('http://localhost:3000/jwt', userData, {
+                    withCredentials: true
+                })
+                .then(res => {
+                    console.log('Token after jwt',res.data);
+                    const token = res.data.token;
+                    localStorage.setItem('token', token);
+                })
+                .error(error => {
+                    console.log(error);
+                })
+           }
             console.log("User in the auth state change", currentUser);
         })
         return()=> {

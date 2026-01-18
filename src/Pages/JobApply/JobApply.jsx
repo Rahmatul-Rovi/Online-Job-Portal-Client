@@ -32,7 +32,7 @@ const JobApply = () => {
     };
 
     axios
-      .post("https://job-portal-server-50h1rzimu-rahmatul-rovis-projects.vercel.app/applications", application)
+      .post("http://localhost:3000/applications", application)
       .then((res) => {
         if (res.data.insertedId) {
           Swal.fire({
